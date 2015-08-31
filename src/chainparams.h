@@ -81,6 +81,7 @@ public:
     virtual const Checkpoints::CCheckpointData& Checkpoints() const = 0;
 
     // Litecoin: Height to enforce v2 block
+    // Nyancoin2: Need to remove references to this logic
     int EnforceV2AfterHeight() const { return nEnforceV2AfterHeight; }
 protected:
     CChainParams() {}
@@ -114,6 +115,7 @@ protected:
     bool fTestnetToBeDeprecatedFieldRPC;
 
     // Litecoin: Height to enforce v2 blocks
+    // Nyancoin2: Make sure to make this value not matter; must be NYAN1.2 compatible
     int nEnforceV2AfterHeight;
 };
 

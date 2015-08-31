@@ -1,5 +1,5 @@
-bin_PROGRAMS += qt/test/test_litecoin-qt
-TESTS += qt/test/test_litecoin-qt
+bin_PROGRAMS += qt/test/test_nyancoin-qt
+TESTS += qt/test/test_nyancoin-qt
 
 TEST_QT_MOC_CPP = qt/test/moc_uritests.cpp
 
@@ -39,9 +39,9 @@ CLEAN_BITCOIN_QT_TEST = $(TEST_QT_MOC_CPP) qt/test/*.gcda qt/test/*.gcno
 
 CLEANFILES += $(CLEAN_BITCOIN_QT_TEST)
 
-test_bitcoin_qt : qt/test/test_litecoin-qt$(EXEEXT)
+test_bitcoin_qt : qt/test/test_nyancoin-qt$(EXEEXT)
 
-test_bitcoin_qt_check : qt/test/test_litecoin-qt$(EXEEXT) FORCE
+test_bitcoin_qt_check : qt/test/test_nyancoin-qt$(EXEEXT) FORCE
 	$(MAKE) check-TESTS TESTS=$^
 
 test_bitcoin_qt_clean: FORCE

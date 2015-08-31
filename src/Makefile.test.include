@@ -1,7 +1,7 @@
-TESTS += test/test_litecoin test/bitcoin-util-test.py
-bin_PROGRAMS += test/test_litecoin
+TESTS += test/test_nyancoin test/bitcoin-util-test.py
+bin_PROGRAMS += test/test_nyancoin
 TEST_SRCDIR = test
-TEST_BINARY=test/test_litecoin$(EXEEXT)
+TEST_BINARY=test/test_nyancoin$(EXEEXT)
 
 EXTRA_DIST += \
 	test/bctest.py \

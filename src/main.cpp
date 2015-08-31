@@ -1,7 +1,13 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2011-2015 The Litecoin developers [they didn't claim it in v0.10.2.2; Nyancoins claims it for them in NYAN2]
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
+// Copyright (c) 2015-2015 The Nyancoin developer
+// Copyright (c) 2015-3015 Bender B. Rodriguez, Esq.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// The only cryptocurrency with the ineffable spirit of NYAN.
+// TO INFINITY AND BEYOND!
 
 #include "main.h"
 
@@ -30,9 +36,10 @@
 using namespace boost;
 using namespace std;
 
-#if defined(NDEBUG)
-# error "Litecoin cannot be compiled without assertions."
-#endif
+/** if defined(NDEBUG) **/
+/** error "Litecoin cannot be compiled without assertions." */
+/** endif **/
+/** Nyancoin is more tolerant. **/
 
 /**
  * Global state
@@ -73,7 +80,7 @@ static void CheckBlockIndex();
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Litecoin Signed Message:\n";
+const string strMessageMagic = "Nyancoin Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -1244,15 +1251,18 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex)
 
 CAmount GetBlockValue(int nHeight, const CAmount& nFees)
 {
-    CAmount nSubsidy = 50 * COIN;
+    CAmount nSubsidy = 337 * COIN;
     int halvings = nHeight / Params().SubsidyHalvingInterval();
 
     // Force block reward to zero when right shift is undefined.
     if (halvings >= 64)
         return nFees;
 
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-    nSubsidy >>= halvings;
+    nSubsidy >>= halvings; // Nyancoin: 500k blocks
+
+    if(nHeight < 50){
+      nSubsidy = 67400 * COIN; // 1% premine
+    }
 
     return nSubsidy + nFees;
 }
@@ -1647,7 +1657,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("litecoin-scriptch");
+    RenameThread("nyancoin-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -2564,17 +2574,18 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         }
     }
 
-    if (enforceV2)
+    // Nyancoin2: Do not allow any possibility of forking against NYAN1.2
+    if (false) // was: enforceV2
     {
-        return state.Invalid(error("%s : rejected nVersion=1 block", __func__),
-                             REJECT_OBSOLETE, "bad-version");
+        //return state.Invalid(error("%s : rejected nVersion=1 block", __func__),
+        //                     REJECT_OBSOLETE, "bad-version");
     }
 
     // Reject block.nVersion=2 blocks when 95% (75% on testnet) of the network has upgraded:
     if (block.nVersion < 3 && CBlockIndex::IsSuperMajority(3, pindexPrev, Params().RejectBlockOutdatedMajority()))
     {
-        return state.Invalid(error("%s : rejected nVersion=2 block", __func__),
-                             REJECT_OBSOLETE, "bad-version");
+        //return state.Invalid(error("%s : rejected nVersion=2 block", __func__),
+        //                     REJECT_OBSOLETE, "bad-version");
     }
 
     return true;
@@ -2610,7 +2621,8 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
         }
     }
 
-    if (checkHeightMismatch)
+    // NYAN2: Don't fork against NYAN1.2
+    if (false) // was checkHeightMismatch
     {
         CScript expect = CScript() << nHeight;
         if (block.vtx[0].vin[0].scriptSig.size() < expect.size() ||

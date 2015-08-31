@@ -17,7 +17,8 @@ static const CAmount COIN = 100000000;
 static const CAmount CENT = 1000000;
 
 /** No amount larger than this (in satoshi) is valid */
-static const CAmount MAX_MONEY = 84000000 * COIN;
+/** We hold this value to be elite. */
+static const CAmount MAX_MONEY = 337000000 * COIN;
 inline bool MoneyRange(const CAmount& nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 
 /** Type-safe wrapper class to for fee rates

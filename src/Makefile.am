@@ -60,11 +60,11 @@ bin_PROGRAMS =
 TESTS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += litecoind
+  bin_PROGRAMS += nyancoind
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += litecoin-cli litecoin-tx
+  bin_PROGRAMS += nyancoin-cli nyancoin-tx
 endif
 
 .PHONY: FORCE

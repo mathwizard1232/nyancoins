@@ -73,7 +73,7 @@ static const unsigned int BLOCKFILE_CHUNK_SIZE = 0x1000000; // 16 MiB
 /** The pre-allocation chunk size for rev?????.dat files (since 0.8) */
 static const unsigned int UNDOFILE_CHUNK_SIZE = 0x100000; // 1 MiB
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
-static const int COINBASE_MATURITY = 100;
+static const int COINBASE_MATURITY = 15;
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 /** Maximum number of script-checking threads allowed */
@@ -98,12 +98,12 @@ static const unsigned int DATABASE_WRITE_INTERVAL = 3600;
 static const unsigned int MAX_REJECT_MESSAGE_LENGTH = 111;
 
 /** Litecoin: Dust Threshold: outputs below this value in satoshis are assessed an additional 1000 bytes per txout */
-static const CAmount DUST_THRESHOLD = 100000; // 0.001 LTC
+static const CAmount DUST_THRESHOLD = 100000; // 0.001 NYAN
 /** Litecoin: Default TX Fee per 1000 bytes */
-static const CAmount DEFAULT_TX_FEE = 100000; // 0.001 LTC
+static const CAmount DEFAULT_TX_FEE = 100000; // 0.001 NYAN
 
 /** Litecoin: default minimum input threshold, override with -mininput */
-static const CAmount DEFAULT_MINIMUM_INPUT_THRESHOLD = DUST_THRESHOLD / 100; // 0.00001 LTC
+static const CAmount DEFAULT_MINIMUM_INPUT_THRESHOLD = DUST_THRESHOLD / 100; // 0.00001 NYAN
 
 /** "reject" message codes */
 static const unsigned char REJECT_MALFORMED = 0x01;

@@ -106,7 +106,8 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Litecoin address (e.g. %1)").arg("Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2"));
+    // We should switch this to a Nyancoin address presumably?
+    widget->setPlaceholderText(QObject::tr("Enter a Nyancoin address (e.g. %1)").arg("Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2"));
 #endif
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -124,7 +125,7 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
     // return if URI is not valid or is no bitcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("litecoin"))
+    if(!uri.isValid() || uri.scheme() != QString("nyancoin"))
         return false;
 
     SendCoinsRecipient rv;
@@ -188,9 +189,9 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
     //
     //    Cannot handle this later, because bitcoin:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("litecoin://", Qt::CaseInsensitive))
+    if(uri.startsWith("nyancoin://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 11, "litecoin:");
+        uri.replace(0, 11, "nyancoin:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
@@ -198,7 +199,7 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("litecoin:%1").arg(info.address);
+    QString ret = QString("nyancoin:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
@@ -567,7 +568,7 @@ TableViewLastColumnResizingFixer::TableViewLastColumnResizingFixer(QTableView* t
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "Litecoin.lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "Nyancoin.lnk";
 }
 
 bool GetStartOnSystemStartup()
@@ -649,7 +650,7 @@ boost::filesystem::path static GetAutostartDir()
 
 boost::filesystem::path static GetAutostartFilePath()
 {
-    return GetAutostartDir() / "litecoin.desktop";
+    return GetAutostartDir() / "nyancoin.desktop";
 }
 
 bool GetStartOnSystemStartup()
@@ -690,7 +691,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         // Write a bitcoin.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        optionFile << "Name=Litecoin\n";
+        optionFile << "Name=Nyancoin\n";
         optionFile << "Exec=" << pszExePath << " -min\n";
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
