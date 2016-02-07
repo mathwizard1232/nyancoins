@@ -8,6 +8,8 @@
 
 #include <stdint.h>
 
+#define COINFIX1_BLOCK  (15000)
+
 class CBlockHeader;
 class CBlockIndex;
 class uint256;
